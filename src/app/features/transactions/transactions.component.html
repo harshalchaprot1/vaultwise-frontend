@@ -1,0 +1,106 @@
+<section class="page-headline">
+  <h1>Transactions</h1>
+  <p>Create, review, and update income or expense records.</p>
+</section>
+
+<mat-card class="data-card form-card">
+  <mat-card-title>{{ form.valid && form.dirty ? 'Transaction Draft' : 'Add Transaction' }}</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="income">Income</mat-option>
+          <mat-option value="expense">Expense</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Category ID</mat-label>
+        <input matInput type="number" formControlName="categoryId" placeholder="e.g. 2" />
+        <mat-error *ngIf="form.controls.categoryId.hasError('required')">Category ID is required.</mat-error>
+        <mat-error *ngIf="form.controls.categoryId.hasError('min')">Category ID must be at least 1.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Brand ID (optional)</mat-label>
+        <input matInput type="number" formControlName="brandId" placeholder="e.g. 1" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+        <mat-error *ngIf="form.controls.amount.hasError('min')">Amount must be greater than zero.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput type="date" formControlName="transactionDate" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Note</mat-label>
+        <textarea matInput rows="2" formControlName="note"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions full-width">
+        <button mat-flat-button color="primary" type="submit">
+          <mat-icon>{{ 'save' }}</mat-icon>
+          {{ 'Save Transaction' }}
+        </button>
+        <button mat-stroked-button type="button" *ngIf="form.dirty" (click)="cancelEdit()">Clear</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="data-card">
+  <mat-card-title>Transaction History</mat-card-title>
+  <mat-card-content>
+    <div class="table-wrap">
+      <table mat-table [dataSource]="transactions()" class="vaultwise-table">
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let row">{{ row.date | date: 'mediumDate' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="chip" [class.income]="row.type === 'income'" [class.expense]="row.type === 'expense'">{{ row.type }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let row">{{ row.category }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let row">{{ row.amount | currency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let row">{{ row.description || '-' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row" class="actions-cell">
+            <button mat-icon-button color="primary" (click)="edit(row)" aria-label="Edit transaction">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="remove(row.id)" aria-label="Delete transaction">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="hover-row"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

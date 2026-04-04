@@ -1,0 +1,88 @@
+<section class="page-headline">
+  <h1>Budgets</h1>
+  <p>Set thresholds and monitor category-level spending adherence.</p>
+</section>
+
+<mat-card class="data-card form-card">
+  <mat-card-title>Budget Planner</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Category ID</mat-label>
+        <input matInput type="number" formControlName="categoryId" placeholder="e.g. 2" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput type="date" formControlName="startDate" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput type="date" formControlName="endDate" />
+      </mat-form-field>
+
+      <div class="form-actions full-width">
+        <button mat-flat-button color="primary" type="submit">Save Budget</button>
+        <button mat-stroked-button type="button" *ngIf="form.dirty" (click)="cancelEdit()">Clear</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="data-card">
+  <mat-card-title>Budget Tracker</mat-card-title>
+  <mat-card-content>
+    <div class="table-wrap">
+      <table mat-table [dataSource]="budgets()" class="vaultwise-table">
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let row">{{ row.category }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="period">
+          <th mat-header-cell *matHeaderCellDef>Period</th>
+          <td mat-cell *matCellDef="let row">{{ row.period }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="limitAmount">
+          <th mat-header-cell *matHeaderCellDef>Limit</th>
+          <td mat-cell *matCellDef="let row">{{ row.limitAmount | currency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="spent">
+          <th mat-header-cell *matHeaderCellDef>Spent</th>
+          <td mat-cell *matCellDef="let row">{{ (row.spent || 0) | currency }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="usage">
+          <th mat-header-cell *matHeaderCellDef>Usage</th>
+          <td mat-cell *matCellDef="let row" class="usage-cell">
+            <mat-progress-bar mode="determinate" [value]="usagePercent(row)"></mat-progress-bar>
+            <small>{{ usagePercent(row) / 100 | percent: '1.0-0' }}</small>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row" class="actions-cell">
+            <button mat-icon-button color="primary" (click)="edit(row)" aria-label="Edit budget">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="remove(row.id)" aria-label="Delete budget">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="hover-row"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

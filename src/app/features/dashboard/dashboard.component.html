@@ -1,0 +1,55 @@
+<section class="page-headline">
+  <h1>Financial Dashboard</h1>
+  <p>Real-time pulse of income, spending, and category performance.</p>
+</section>
+
+<div class="stats-grid" *ngIf="summary() as metrics">
+  <mat-card class="stat-card lift-on-hover">
+    <mat-card-content>
+      <h3>Total Income</h3>
+      <p>{{ metrics.totalIncome | currency }}</p>
+      <mat-icon>trending_up</mat-icon>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card lift-on-hover">
+    <mat-card-content>
+      <h3>Total Expense</h3>
+      <p>{{ metrics.totalExpense | currency }}</p>
+      <mat-icon>trending_down</mat-icon>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card lift-on-hover">
+    <mat-card-content>
+      <h3>Current Balance</h3>
+      <p>{{ metrics.balance | currency }}</p>
+      <mat-icon>account_balance_wallet</mat-icon>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card class="category-card" *ngIf="summary() as metrics">
+  <mat-card-header>
+    <mat-card-title>Expense by Category</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="category-item" *ngFor="let row of metrics.byCategory">
+      <div class="label-row">
+        <span>{{ row.category }}</span>
+        <strong>{{ row.value | currency }}</strong>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="metrics.totalExpense ? (row.value / metrics.totalExpense) * 100 : 0"></mat-progress-bar>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="loading()" class="empty-state">
+  <mat-card-content>Loading your dashboard metrics...</mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="!loading() && loadFailed()" class="empty-state">
+  <mat-card-content>
+    Unable to load summary data right now. Your account and transaction modules still work.
+  </mat-card-content>
+</mat-card>

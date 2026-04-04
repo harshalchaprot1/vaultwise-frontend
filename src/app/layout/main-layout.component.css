@@ -1,0 +1,60 @@
+.shell {
+  min-height: 100dvh;
+  background: transparent;
+}
+
+.shell-nav {
+  width: 290px;
+  border-right: 1px solid var(--border-soft);
+  background: linear-gradient(180deg, #133e5e 0%, #0a1a2a 100%);
+  color: #f8fbff;
+}
+
+.brand-panel {
+  padding: 1.2rem 1.2rem 1.1rem;
+}
+
+.brand-panel h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.brand-panel p {
+  margin: 0.4rem 0 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.active-link {
+  background: color-mix(in srgb, #fff 16%, transparent);
+  border-radius: 0.7rem;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--bg-surface) 88%, #ffffff 12%);
+  backdrop-filter: blur(6px);
+}
+
+.toolbar-title {
+  font-weight: 700;
+  margin-left: 0.8rem;
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.view-wrapper {
+  padding: 1.2rem;
+}
+
+@media (max-width: 960px) {
+  .view-wrapper {
+    padding: 1rem;
+  }
+}

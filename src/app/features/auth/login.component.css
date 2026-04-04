@@ -1,0 +1,71 @@
+.auth-page {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 8% 10%, color-mix(in srgb, var(--brand-primary) 18%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 90% 75%, color-mix(in srgb, var(--brand-accent) 22%, transparent) 0%, transparent 45%),
+    var(--bg-base);
+}
+
+.auth-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(26px);
+  pointer-events: none;
+}
+
+.shape-one {
+  width: 240px;
+  height: 240px;
+  top: 5%;
+  left: 5%;
+  background: color-mix(in srgb, var(--brand-primary) 30%, transparent);
+}
+
+.shape-two {
+  width: 260px;
+  height: 260px;
+  bottom: 4%;
+  right: 6%;
+  background: color-mix(in srgb, var(--brand-accent) 26%, transparent);
+}
+
+.auth-card {
+  width: min(480px, 100%);
+  position: relative;
+  z-index: 1;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(5px);
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.auth-link-row {
+  margin: 0.2rem 0 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.auth-link-row a {
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+.auth-link-row a:hover {
+  text-decoration: underline;
+}
+
+button[type='submit'] {
+  height: 2.9rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+}

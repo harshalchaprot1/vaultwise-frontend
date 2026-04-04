@@ -1,0 +1,50 @@
+<mat-sidenav-container class="shell">
+  <mat-sidenav
+    [opened]="sidenavOpened()"
+    [mode]="drawerMode()"
+    class="shell-nav"
+    [fixedInViewport]="isMobile()"
+    [fixedTopGap]="64"
+  >
+    <section class="brand-panel">
+      <h2>VaultWise</h2>
+      <p>Smart finance operations</p>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        routerLinkActive="active-link"
+        (click)="closeForMobile()"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="app-toolbar">
+      <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle navigation">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar-title">VaultWise Finance Hub</span>
+
+      <span class="toolbar-spacer"></span>
+
+      <button mat-flat-button color="accent" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </mat-toolbar>
+
+    <main class="view-wrapper">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

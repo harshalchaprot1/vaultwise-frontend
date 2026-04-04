@@ -1,0 +1,63 @@
+.page-headline h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.page-headline p {
+  margin: 0.3rem 0 1.1rem;
+  color: var(--text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  border-radius: 1rem;
+  border: 1px solid var(--border-soft);
+}
+
+.stat-card mat-card-content {
+  position: relative;
+}
+
+.stat-card h3 {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.stat-card p {
+  margin: 0.6rem 0 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.stat-card mat-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0.25;
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.category-card,
+.empty-state {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border-soft);
+}
+
+.category-item {
+  margin-bottom: 1rem;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}

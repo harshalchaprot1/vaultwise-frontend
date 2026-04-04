@@ -1,0 +1,46 @@
+<section class="auth-page">
+  <div class="auth-bg-shape shape-one"></div>
+  <div class="auth-bg-shape shape-two"></div>
+
+  <mat-card class="auth-card">
+    <mat-card-header>
+      <mat-card-title>Welcome to VaultWise</mat-card-title>
+      <mat-card-subtitle>Sign in to manage your finances</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email or User ID</mat-label>
+          <input matInput type="text" formControlName="identifier" placeholder="you@example.com or 1" />
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-error *ngIf="form.controls.identifier.hasError('required')">Email or user ID is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="At least 6 characters"
+          />
+          <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())" aria-label="Toggle password visibility">
+            <mat-icon>{{ hidePassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="form.controls.password.hasError('required')">Password is required.</mat-error>
+          <mat-error *ngIf="form.controls.password.hasError('minlength')">Minimum 6 characters required.</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Signing in...' : 'Sign In' }}
+        </button>
+
+        <p class="auth-link-row">
+          New user?
+          <a routerLink="/auth/register">Create an account</a>
+        </p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

@@ -1,27 +1,73 @@
-# VaultwiseFrontend
+# VaultWise Frontend (Angular 18 + Material 18.2.14)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+This frontend is designed for a Node.js + Express + MySQL backend running at `http://localhost:3000` and provides end-to-end UI modules for:
 
-## Development server
+- Auth
+- Dashboard
+- Transactions
+- Budgets
+- Reports
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## What Is Implemented
 
-## Code scaffolding
+- Angular standalone architecture with route protection (JWT guard)
+- Angular Material UI shell with toolbar, side nav, responsive cards/tables/forms
+- Typed HttpClient services for backend APIs
+- Auth interceptor that adds `Authorization: Bearer <token>`
+- Form validation with Material errors and responsive CSS hover effects
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Frontend Routes
+
+- `/auth/login`
+- `/dashboard`
+- `/transactions`
+- `/budgets`
+- `/reports`
+
+Protected routes require a valid token in local storage (`vaultwise_token`).
+
+## Backend API Contract Expected
+
+Base URL: `http://localhost:3000`
+
+- `POST /api/auth/login`
+- `GET|POST|PUT|DELETE /api/users`
+- `GET|POST|PUT|DELETE /api/transactions`
+- `GET|POST|PUT|DELETE /api/budgets`
+- `GET /api/reports/summary`
+- `GET /api/reports/monthly?year=YYYY`
+
+The UI expects numeric `id` fields (auto-increment in MySQL) for Users, Transactions, and Budgets.
+
+## CORS Requirement In Express Backend
+
+Ensure backend includes:
+
+```ts
+import cors from 'cors';
+
+app.use(
+	cors({
+		origin: 'http://localhost:4200',
+		credentials: true
+	})
+);
+```
+
+## Run Locally
+
+1. Start backend on port `3000`.
+2. In this folder run:
+
+```bash
+npm install
+npm start
+```
+
+Frontend runs on `http://localhost:4200`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run build
+```

@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	--bg-base: #f4f8fb;
+	--bg-surface: #ffffff;
+	--brand-primary: #0f5d8d;
+	--brand-accent: #0ea6a0;
+	--text-main: #1b2733;
+	--text-muted: #5d6a78;
+	--border-soft: #d9e4ec;
+	--shadow-soft: 0 12px 28px rgba(21, 38, 52, 0.08);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: 'Manrope', 'Segoe UI', sans-serif;
+	color: var(--text-main);
+	background:
+		radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--brand-primary) 16%, transparent) 0%, transparent 36%),
+		radial-gradient(circle at 10% 85%, color-mix(in srgb, var(--brand-accent) 14%, transparent) 0%, transparent 40%),
+		var(--bg-base);
+}
+
+h1,
+h2,
+h3 {
+	font-family: 'Sora', 'Segoe UI', sans-serif;
+}
+
+.lift-on-hover {
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.lift-on-hover:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-soft);
+}
