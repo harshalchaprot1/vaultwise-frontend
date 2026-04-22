@@ -122,6 +122,12 @@ export class TransactionsComponent implements OnInit {
     this.resetForm();
   }
 
+  preventInvalidChars(event: KeyboardEvent): void {
+    if (['e', 'E', '+', '-', '.'].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   private loadTransactions(): void {
     const userId = this.authService.getCurrentUser()?.id;
     if (!userId) {
