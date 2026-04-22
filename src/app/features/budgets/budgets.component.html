@@ -56,12 +56,12 @@
 
         <ng-container matColumnDef="limitAmount">
           <th mat-header-cell *matHeaderCellDef>Limit</th>
-          <td mat-cell *matCellDef="let row">{{ row.limitAmount | currency }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.limitAmount }}</td>
         </ng-container>
 
         <ng-container matColumnDef="spent">
           <th mat-header-cell *matHeaderCellDef>Spent</th>
-          <td mat-cell *matCellDef="let row">{{ (row.spent || 0) | currency }}</td>
+          <td mat-cell *matCellDef="let row">{{ (row.spent || 0) }}</td>
         </ng-container>
 
         <ng-container matColumnDef="usage">

@@ -16,7 +16,7 @@
 </mat-card>
 
 <mat-card class="data-card" *ngIf="report() as r">
-  <mat-card-title>Annual Breakdown: {{ r.totalExpenses | currency }} Total</mat-card-title>
+  <mat-card-title>Annual Breakdown: {{ r.totalExpenses }} Total</mat-card-title>
   <mat-card-content>
     <div class="table-wrap">
       <table mat-table [dataSource]="r.byCategory" class="vaultwise-table">
@@ -27,7 +27,7 @@
 
         <ng-container matColumnDef="spent">
           <th mat-header-cell *matHeaderCellDef>Total Spent</th>
-          <td mat-cell *matCellDef="let row">{{ row.totalSpent | currency }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.totalSpent }}</td>
         </ng-container>
 
         <ng-container matColumnDef="transactions">

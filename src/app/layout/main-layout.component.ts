@@ -39,7 +39,7 @@ export class MainLayoutComponent {
   readonly navItems = [
     { icon: 'space_dashboard', label: 'Dashboard', route: '/dashboard' },
     { icon: 'receipt_long', label: 'Transactions', route: '/transactions' },
-    { icon: 'savings', label: 'Budgets', route: '/budgets' },
+    //{ icon: 'savings', label: 'Budgets', route: '/budgets' },
     { icon: 'analytics', label: 'Reports', route: '/reports' }
   ];
 

@@ -7,7 +7,7 @@
   <mat-card class="stat-card lift-on-hover">
     <mat-card-content>
       <h3>Total Income</h3>
-      <p>{{ metrics.totalIncome | currency }}</p>
+      <p>{{ metrics.totalIncome }}</p>
       <mat-icon>trending_up</mat-icon>
     </mat-card-content>
   </mat-card>
@@ -15,7 +15,7 @@
   <mat-card class="stat-card lift-on-hover">
     <mat-card-content>
       <h3>Total Expense</h3>
-      <p>{{ metrics.totalExpense | currency }}</p>
+      <p>{{ metrics.totalExpense }}</p>
       <mat-icon>trending_down</mat-icon>
     </mat-card-content>
   </mat-card>
@@ -23,7 +23,7 @@
   <mat-card class="stat-card lift-on-hover">
     <mat-card-content>
       <h3>Current Balance</h3>
-      <p>{{ metrics.balance | currency }}</p>
+      <p>{{ metrics.balance }}</p>
       <mat-icon>account_balance_wallet</mat-icon>
     </mat-card-content>
   </mat-card>
@@ -37,7 +37,7 @@
     <div class="category-item" *ngFor="let row of metrics.byCategory">
       <div class="label-row">
         <span>{{ row.category }}</span>
-        <strong>{{ row.value | currency }}</strong>
+        <strong>{{ row.value }}</strong>
       </div>
       <mat-progress-bar mode="determinate" [value]="metrics.totalExpense ? (row.value / metrics.totalExpense) * 100 : 0"></mat-progress-bar>
     </div>
