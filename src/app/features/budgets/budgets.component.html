@@ -19,12 +19,16 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Start Date</mat-label>
-        <input matInput type="date" formControlName="startDate" />
+        <input matInput [matDatepicker]="pickerStart" formControlName="startDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>End Date</mat-label>
-        <input matInput type="date" formControlName="endDate" />
+        <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
       </mat-form-field>
 
       <div class="form-actions full-width">

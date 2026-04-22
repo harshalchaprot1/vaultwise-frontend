@@ -5,8 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MonthlyReport } from '../../core/models/report.model';
+import { AnnualReport } from '../../core/models/report.model';
 import { ReportsService } from '../../core/services/reports.service';
+import { AuthService } from '../../core/services/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -27,9 +28,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ReportsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
 
-  readonly displayedColumns = ['month', 'income', 'expense', 'net'];
-  readonly rows = signal<MonthlyReport[]>([]);
+  readonly displayedColumns = ['category', 'spent', 'transactions'];
+  readonly report = signal<AnnualReport | null>(null);
 
   readonly yearForm = this.fb.nonNullable.group({
     year: [new Date().getFullYear(), [Validators.required, Validators.min(2020), Validators.max(2100)]]
@@ -47,12 +49,11 @@ export class ReportsComponent implements OnInit {
     if (this.yearForm.invalid) {
       return;
     }
+    
+    const userId = this.authService.getCurrentUser()?.id;
+    if (!userId) return;
 
     const year = this.yearForm.getRawValue().year;
-    this.reportsService.getMonthly(year).subscribe((rows) => this.rows.set(rows));
-  }
-
-  net(row: MonthlyReport): number {
-    return row.income - row.expense;
+    this.reportsService.getAnnual(userId, year).subscribe((res) => this.report.set(res));
   }
 }

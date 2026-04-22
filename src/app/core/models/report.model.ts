@@ -8,8 +8,14 @@ export interface ReportSummary {
   }>;
 }
 
-export interface MonthlyReport {
-  month: string;
-  income: number;
-  expense: number;
+export interface AnnualReportCategory {
+  categoryId: number;
+  totalSpent: number;
+  transactionCount: number;
+}
+
+export interface AnnualReport {
+  year: number;
+  totalExpenses: number;
+  byCategory: AnnualReportCategory[];
 }

@@ -1,6 +1,6 @@
 <section class="page-headline">
   <h1>Reports</h1>
-  <p>Run monthly profitability snapshots and compare trends over time.</p>
+  <p>Run annual profitability snapshots and compare trends over time.</p>
 </section>
 
 <mat-card class="data-card">
@@ -15,29 +15,24 @@
   </mat-card-content>
 </mat-card>
 
-<mat-card class="data-card">
-  <mat-card-title>Monthly Breakdown</mat-card-title>
+<mat-card class="data-card" *ngIf="report() as r">
+  <mat-card-title>Annual Breakdown: {{ r.totalExpenses | currency }} Total</mat-card-title>
   <mat-card-content>
     <div class="table-wrap">
-      <table mat-table [dataSource]="rows()" class="vaultwise-table">
-        <ng-container matColumnDef="month">
-          <th mat-header-cell *matHeaderCellDef>Month</th>
-          <td mat-cell *matCellDef="let row">{{ row.month }}</td>
+      <table mat-table [dataSource]="r.byCategory" class="vaultwise-table">
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category ID</th>
+          <td mat-cell *matCellDef="let row">Category {{ row.categoryId }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="income">
-          <th mat-header-cell *matHeaderCellDef>Income</th>
-          <td mat-cell *matCellDef="let row">{{ row.income | currency }}</td>
+        <ng-container matColumnDef="spent">
+          <th mat-header-cell *matHeaderCellDef>Total Spent</th>
+          <td mat-cell *matCellDef="let row">{{ row.totalSpent | currency }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="expense">
-          <th mat-header-cell *matHeaderCellDef>Expense</th>
-          <td mat-cell *matCellDef="let row">{{ row.expense | currency }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="net">
-          <th mat-header-cell *matHeaderCellDef>Net</th>
-          <td mat-cell *matCellDef="let row">{{ net(row) | currency }}</td>
+        <ng-container matColumnDef="transactions">
+          <th mat-header-cell *matHeaderCellDef>Transactions</th>
+          <td mat-cell *matCellDef="let row">{{ row.transactionCount }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

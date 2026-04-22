@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { Budget } from '../../core/models/budget.model';
 import { AuthService } from '../../core/services/auth.service';
 import { BudgetUpsertPayload, BudgetsService } from '../../core/services/budgets.service';
@@ -30,7 +32,9 @@ import { BudgetUpsertPayload, BudgetsService } from '../../core/services/budgets
     MatTableModule,
     MatProgressBarModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: './budgets.component.html',
   styleUrl: './budgets.component.css'
